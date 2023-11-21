@@ -1,44 +1,38 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:wisata_candi/screens/SignUpScreen.dart';
 
 class SignInScreen extends StatefulWidget {
-  SignInScreen({super.key});
+  SignInScreen ({super.key});
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
-
 class _SignInScreenState extends State<SignInScreen> {
-  //TODO :1. DEKLARASIKAN VARIABEL
+  // TODO : 1. Deklarasi Variabel
   final TextEditingController _usernameController = TextEditingController();
-
   final TextEditingController _passwordController = TextEditingController();
 
   String _errorText = '';
-
   bool _isSignedIn = false;
-
   bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //TODO: 2.Pasang AppBar
-      appBar: AppBar(
-        title: Text('Sign In'),
-      ),
-      //TOOD: 3. Pasang body
+    return  Scaffold(
+      // TODO : 2. Pasang Appbar
+      appBar: AppBar(title: Text('Sign In'),),
+      // TODO : 3. Pasang body
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: Form(
-                child: Column(
-              //TODO: 4. ATUR mainAxisAlignment dan crossAxisAligment
+            child: Column(
+              // TODO : 4. Atur mainAxisAligment dan CrossAxisAligment
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // TODO: 5. Pasang TextFormField Nama Pengguna
+                // TODO : 5. Pasang TextFormField Nama Pengguna
                 TextFormField(
                   controller: _usernameController,
                   decoration: InputDecoration(
@@ -46,10 +40,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     border: OutlineInputBorder(),
                   ),
                 ),
-                // TODO: 6. Pasang TextFormField Kata Sandi
-                SizedBox(
-                  height: 20,
-                ),
+                // TODO : 6. Pasang TextFormField Kata Sandi
+                SizedBox(height: 20),
                 TextFormField(
                   controller: _passwordController,
                   decoration: InputDecoration(
@@ -57,51 +49,72 @@ class _SignInScreenState extends State<SignInScreen> {
                     errorText: _errorText.isNotEmpty ? _errorText : null,
                     border: OutlineInputBorder(),
                     suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
+                      onPressed: (){
+                        setState((){
                           _obscurePassword = !_obscurePassword;
                         });
                       },
                       icon: Icon(
-                        _obscurePassword
-                            ? Icons.visibility_off
+                        _obscurePassword ? Icons.visibility_off
                             : Icons.visibility,
                       ),
                     ),
                   ),
                   obscureText: _obscurePassword,
                 ),
-
-                // TODO: 7. Pasang ElevatedButton Sign In
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(onPressed: () {}, child: Text('Sign In')),
-                // TODO: 8. Pasang TextButton Sign Up
-                SizedBox(
-                  height: 10,
-                ),
+                // TODO : 7. Pasang ElevatedButton Sign In
+                SizedBox(height: 20),
+                ElevatedButton(
+                    onPressed: (){
+                      setState(() {
+                        // if(_passwordController.value.text.length < 8){
+                        //   _errorText = "Password harus lebih dari atau sama dengan 8 karakter";
+                        // } else if(!_passwordController.value.text.contains(RegExp(r'[A-z'))){
+                        //   _errorText = 'Password harus berisi uppercase';
+                        // }else if(!_passwordController.value.text.contains(RegExp(r'[a-z]'))){
+                        //   _errorText = 'Password harus berisi lowercase';
+                        // }else if(!_passwordController.value.text.contains(RegExp(r'[0-9]'))){
+                        //   _errorText = 'Password harus berisi angka';
+                        // }else if(!_passwordController.value.text.contains(RegExp(r'[_/*.,]'))){
+                        //   _errorText = 'Password harus berisi karakter spesial (_/*.,)';
+                        // }else if(
+                        //     _passwordController.value.text.contains(_usernameController.value.text)
+                        // ){
+                        //   _errorText = 'Password harus berisi nama pengguna anda';
+                        // } else {
+                        //   _errorText = '';
+                      });
+                      Navigator.pop(context);
+                    },
+                    child: Text('Sign In')),
+                // TODO : 8. Pasang TextButton Sign Up
+                SizedBox(height: 10),
                 // TextButton(
-                //     onPressed:(){},
-                //     child: Text('Belum punya akun? Daftar di sini')),
+                //     onPressed: (){},
+                //     child: Text('Belum punya akun? Daftar di sini.')),
                 RichText(
-                  text: TextSpan(
-                    text: 'Belum punya akun?',
-                    style: TextStyle(fontSize: 16, color: Colors.deepPurple),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Daftar di sini.',
-                        style: TextStyle(
-                            color: Colors.blue,
-                            decoration: TextDecoration.underline,
-                            fontSize: 16),
-                        recognizer: TapGestureRecognizer()..onTap = () {},
-                      ),
-                    ],
-                  ),
-                ),
+                    text: TextSpan(
+                        text: 'Belum punya akun?',
+                        style: TextStyle(fontSize: 16, color: Colors.deepPurple),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Daftar di sini.',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                decoration: TextDecoration.underline,
+                                fontSize: 16
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => SignUpScreen())
+                                );
+                              },
+                          )
+                        ]
+                    ))
               ],
-            )),
+            ),
           ),
         ),
       ),
