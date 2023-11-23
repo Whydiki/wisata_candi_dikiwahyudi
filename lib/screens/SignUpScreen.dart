@@ -7,6 +7,7 @@ class SignUpScreen extends StatefulWidget {
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
+
 class _SignUpScreenState extends State<SignUpScreen> {
   // TODO : 1. Deklarasi Variabel
   final TextEditingController _usernameController = TextEditingController();
@@ -16,11 +17,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _errorText = '';
   bool _obscurePassword = true;
 
+  //TODO : 1. Membuat metode signup
+  void _signUp() async {
+    String name = _fullnameController.text.trim();
+    String username = _usernameController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if (password.length < 8 ||
+        !password.contains(RegExp(r'[A-Z]')) ||
+        !password.contains(RegExp(r'[a-z]')) ||
+        !password.contains(RegExp(r'[0-9]')) ||
+        !password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      setState(() {
+        _errorText =
+        'Minimal 8 karakter kombinasi [A-Z], [a-z], [0-9], [!@#\\\$%^&*(),.?":{}|<>]';
+      });
+      return;
+    };
+    print('* Sign Up Berhasil');
+    print('Nama: $name');
+    print('UserName: $username');
+    print('Password: $password');
+  }
+
+  //TODO : 2. Membuat metode dispose
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _fullnameController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       // TODO : 2. Pasang Appbar
-      appBar: AppBar(title: Text('Sign Up'),),
+      appBar: AppBar(
+        title: Text('Sign Up'),
+      ),
       // TODO : 3. Pasang body
       body: Center(
         child: SingleChildScrollView(
@@ -56,13 +92,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     errorText: _errorText.isNotEmpty ? _errorText : null,
                     border: OutlineInputBorder(),
                     suffixIcon: IconButton(
-                      onPressed: (){
-                        setState((){
+                      onPressed: () {
+                        setState(() {
                           _obscurePassword = !_obscurePassword;
                         });
                       },
                       icon: Icon(
-                        _obscurePassword ? Icons.visibility_off
+                        _obscurePassword
+                            ? Icons.visibility_off
                             : Icons.visibility,
                       ),
                     ),
@@ -72,31 +109,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 // TODO : 7. Pasang ElevatedButton Sign In
                 SizedBox(height: 20),
                 ElevatedButton(
-                    onPressed: (){
-                      setState(() {
-                        // if(_passwordController.value.text.length < 8){
-                        //   _errorText = "Password harus lebih dari atau sama dengan 8 karakter";
-                        // } else if(!_passwordController.value.text.contains(RegExp(r'[A-z'))){
-                        //   _errorText = 'Password harus berisi uppercase';
-                        // }else if(!_passwordController.value.text.contains(RegExp(r'[a-z]'))){
-                        //   _errorText = 'Password harus berisi lowercase';
-                        // }else if(!_passwordController.value.text.contains(RegExp(r'[0-9]'))){
-                        //   _errorText = 'Password harus berisi angka';
-                        // }else if(!_passwordController.value.text.contains(RegExp(r'[/*.,]'))){
-                        //   _errorText = 'Password harus berisi karakter spesial (/*.,)';
-                        // }else if(
-                        // _passwordController.value.text.contains(_fullnameController.value.text) ||
-                        //     _passwordController.value.text.contains(_usernameController.value.text)
-                        // ){
-                        //   _errorText = 'Password harus berisi nama atau nama pengguna anda';
-                        // } else {
-                        //   _errorText = '';
-                        // }
-                      });
+                    onPressed: _signUp,
+                      child: Text('Sign Up')),
+                      // setState(() {
+                      //   // if(_passwordController.value.text.length < 8){
+                      //   //   _errorText = "Password harus lebih dari atau sama dengan 8 karakter";
+                      //   // } else if(!_passwordController.value.text.contains(RegExp(r'[A-z'))){
+                      //   //   _errorText = 'Password harus berisi uppercase';
+                      //   // }else if(!_passwordController.value.text.contains(RegExp(r'[a-z]'))){
+                      //   //   _errorText = 'Password harus berisi lowercase';
+                      //   // }else if(!_passwordController.value.text.contains(RegExp(r'[0-9]'))){
+                      //   //   _errorText = 'Password harus berisi angka';
+                      //   // }else if(!_passwordController.value.text.contains(RegExp(r'[/*.,]'))){
+                      //   //   _errorText = 'Password harus berisi karakter spesial (/*.,)';
+                      //   // }else if(
+                      //   // _passwordController.value.text.contains(_fullnameController.value.text) ||
+                      //   //     _passwordController.value.text.contains(_usernameController.value.text)
+                      //   // ){
+                      //   //   _errorText = 'Password harus berisi nama atau nama pengguna anda';
+                      //   // } else {
+                      //   //   _errorText = '';
+                      //   // }
+                      // });
                       Navigator.pop(context);
                     },
-                    child: Text('Sign In')
-                ),
+                    child: Text('Sign In')),
               ],
             ),
           ),
