@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wisata_candi/data/candi_data.dart';
-import 'package:wisata_candi/widgets/item_card.dart';
+import 'package:wisata_candi_dikiwahyudi/data/candi_data.dart';
+import 'package:wisata_candi_dikiwahyudi/widgets/item_card.dart';
 
 import '../models/candi.dart';
 

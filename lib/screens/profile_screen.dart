@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wisata_candi/screens/SignInScreen.dart';
+import 'package:wisata_candi_dikiwahyudi/screens/SignInScreen.dart';
 
 class ProfilScreen extends StatefulWidget {
   const ProfilScreen({super.key});
@@ -16,12 +16,13 @@ class _ProfilScreenState extends State<ProfilScreen> {
 
   // TODO: 5. Implementasi fungsi singin
   void signIn () {
-    Navigator.pushNamed(
-        context, '/sign_in'
-    );
-    setState(() {
-      // isSignedIn = !isSignedIn;
-    });
+    // Navigator.pushNamed(
+    //   context, '/sign_in'
+    // );
+    // setState(() {
+    //   // isSignedIn = !isSignedIn;
+    // });
+    Navigator.pushNamed(context, '/signin');
   }
   // TODO: 6. Implementasi fungsi singout
   void signOut () {
