@@ -66,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     SearchScreen(),
     FavoriteScreen(),
-    ProfilScreen(),
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
